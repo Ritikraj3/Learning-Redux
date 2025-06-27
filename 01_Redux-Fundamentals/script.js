@@ -1,5 +1,7 @@
 import { createStore } from "redux";
 
+const countSpan = document.querySelector(".count-span");
+
 const initialState = {
   count: 0,
   name: "John",
@@ -36,13 +38,16 @@ function reducer(state = initialState, action) {
   }
 }
 
-const store = createStore(reducer);
+const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__?.());
 
 // console.log(store.getState());
 
-store.subscribe(() => {
+const unSubscribe =  store.subscribe(() => {
   console.log(store.getState());
+  countSpan.innerText = store.getState().count;
 });
+
+// countSpan.innerText = store.getState().count;
 
 store.dispatch({ type: INCREASE });
 
@@ -51,6 +56,12 @@ store.dispatch({ type: INCREASE });
 store.dispatch({ type: DECREASE });
 store.dispatch({ type: INCREASE_BY, payload: 10 });
 store.dispatch({ type: DECREASE_BY, payload: 5 });
+
+unSubscribe();
+
+countSpan.addEventListener("click", () => {
+  store.dispatch({ type: INCREASE });
+});
 
 //what redux will do
 

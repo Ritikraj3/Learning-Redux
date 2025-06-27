@@ -18,7 +18,7 @@ function reducer(state = initialState, action) {
 //   } else if (action.type === INCREASE_BY) {
 //     return { ...state, count: state.count + action.payload };
 //   } else if (action.type === DECREASE_BY) {
-//     return { ...state, count: state.count + action.payload };
+//     return { ...state, count: state.count - action.payload };
 //   }
 //   return state;
 
